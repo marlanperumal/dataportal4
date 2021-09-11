@@ -1,10 +1,10 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, Boolean, Date
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, backref
 from sqlalchemy.sql.schema import ForeignKeyConstraint
-from . import Base
+from . import db
 
 
-class Dataset(Base):
+class Dataset(db.Model):
     __tablename__ = "dataset"
     __table_args__ = {"schema": "meta"}
 
@@ -16,7 +16,7 @@ class Dataset(Base):
     is_locked = Column(Boolean, index=True, default=True)
 
 
-class Service(Base):
+class Service(db.Model):
     __tablename__ = "service"
     __table_args__ = {"schema": "meta"}
 
@@ -25,7 +25,7 @@ class Service(Base):
     conn_uri = Column(String)
 
 
-class Table(Base):
+class Table(db.Model):
     __tablename__ = "table"
     __table_args__ = {"schema": "meta"}
 
@@ -46,7 +46,7 @@ class Table(Base):
     service = relationship("Service", backref="tables")
 
 
-class TableHandle(Base):
+class TableHandle(db.Model):
     __tablename__ = "table_handle"
     __table_args__ = {"schema": "meta"}
 
@@ -57,7 +57,7 @@ class TableHandle(Base):
     table = relationship("Table", backref="handles")
 
 
-class TableWeight(Base):
+class TableWeight(db.Model):
     __tablename__ = "table_weight"
     __table_args__ = {"schema": "meta"}
 
@@ -70,7 +70,7 @@ class TableWeight(Base):
     table = relationship("Table", backref="weights")
 
 
-class Branch(Base):
+class Branch(db.Model):
     __tablename__ = "branch"
     __table_args__ = {"schema": "meta"}
 
@@ -83,10 +83,10 @@ class Branch(Base):
     multi_type = Column(Integer)
     path = Column(String)
 
-    parent = relationship("Branch", foreign_keys=["parent_id"], backref="children")
+    children = relationship("Branch", backref=backref("parent", remote_side=[id]))
 
 
-class Field(Base):
+class Field(db.Model):
     __tablename__ = "field"
     __table_args__ = {"schema": "meta"}
 
@@ -95,7 +95,7 @@ class Field(Base):
     name = Column(String)
     type = Column(String)
     table_handle_id = Column(Integer, ForeignKey("meta.table_handle.id"), index=True)
-    branch_id = Column(Integer, index=True)
+    branch_id = Column(Integer, ForeignKey("meta.branch.id"), index=True)
     is_numeric = Column(Boolean, default=False)
     numeric_type = Column(String)
     sort_order = Column(Integer)
@@ -107,12 +107,12 @@ class Field(Base):
     branch = relationship("Branch", backref="fields")
 
 
-class FieldWeight(Base):
+class FieldWeight(db.Model):
     __tablename__ = "field_name"
     __table_args__ = (
         ForeignKeyConstraint(["table_id", "weight_id"], ["meta.table_weight.table_id", "meta.table_weight.weight_id"]),
         ForeignKeyConstraint(["table_id", "field_id"], ["meta.field.table_id", "meta.field.field_id"]),
-        {"schema": "meta"}
+        {"schema": "meta"},
     )
 
     table_id = Column(String, primary_key=True)
@@ -120,11 +120,11 @@ class FieldWeight(Base):
     field_id = Column(String, primary_key=True)
 
 
-class Translation(Base):
+class Translation(db.Model):
     __tablename__ = "translation"
     __table_args__ = (
         ForeignKeyConstraint(["table_id", "field_id"], ["meta.field.table_id", "meta.field.field_id"]),
-        {"schema": "meta"}
+        {"schema": "meta"},
     )
 
     table_id = Column(String, primary_key=True)

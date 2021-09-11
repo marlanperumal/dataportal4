@@ -1,9 +1,9 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, Boolean, Date, UniqueConstraint, ForeignKeyConstraint
 from sqlalchemy.orm import relationship
-from . import Base
+from . import db
 
 
-class User(Base):
+class User(db.Model):
     __tablename__ = "user"
     __table_args__ = {"schema": "auth"}
 
@@ -12,11 +12,12 @@ class User(Base):
     last_name = Column(String)
     email = Column(String)
     organisation_id = Column(Integer, ForeignKey("auth.organisation.id"), index=True)
+    is_admin = Column(Boolean)
 
     organisation = relationship("Organisation", backref="users")
 
 
-class Group(Base):
+class Group(db.Model):
     __tablename__ = "group"
     __table_args__ = {"schema": "auth"}
 
@@ -29,7 +30,7 @@ class Group(Base):
     organisation = relationship("Organisation", backref="groups")
 
 
-class UserGroup(Base):
+class UserGroup(db.Model):
     __tablename__ = "user_group"
     __table_args__ = {"schema": "auth"}
 
@@ -40,7 +41,7 @@ class UserGroup(Base):
     group = relationship("Group", backref="user_groups")
 
 
-class Organisation(Base):
+class Organisation(db.Model):
     __tablename__ = "organisation"
     __table_args__ = {"schema": "auth"}
 
@@ -48,7 +49,7 @@ class Organisation(Base):
     name = Column(String)
 
 
-class OrganisationGroup(Base):
+class OrganisationGroup(db.Model):
     __tablename__ = "organisation_group"
     __table_args__ = {"schema": "auth"}
 
@@ -59,7 +60,7 @@ class OrganisationGroup(Base):
     group = relationship("Group", backref="organisation_groups")
 
 
-class Package(Base):
+class Package(db.Model):
     __tablename__ = "package"
     __table_args__ = {"schema": "auth"}
 
@@ -67,7 +68,7 @@ class Package(Base):
     name = Column(String)
 
 
-class Subscription(Base):
+class Subscription(db.Model):
     __tablename__ = "subscription"
     __table_args__ = {"schema": "auth"}
 
@@ -83,7 +84,7 @@ class Subscription(Base):
     package = relationship("Package", backref="subscriptions")
 
 
-class SubscriptionGroup(Base):
+class SubscriptionGroup(db.Model):
     __tablename__ = "subscription_group"
     __table_args__ = {"schema": "auth"}
 
@@ -91,7 +92,7 @@ class SubscriptionGroup(Base):
     group_id = Column(Integer, ForeignKey("auth.group.id"), primary_key=True)
 
 
-class PackageContent(Base):
+class PackageContent(db.Model):
     __tablename__ = "package_content"
     __table_args__ = (
         ForeignKeyConstraint(["table_id", "field_id"], ["meta.field.table_id", "meta.field.field_id"]),

@@ -5,13 +5,17 @@ name = "pypi"
 
 [packages]
 sqlalchemy = "*"
-alembic = "*"
+flask-sqlalchemy = "*"
+flask--migrate = "*"
+psycopg2-binary = "*"
+celery = "*"
 
 [dev-packages]
 pytest = "*"
 flake8 = "*"
 black = "*"
 ipykernel = "*"
+pre-commit = "*"
 
 [requires]
 python_version = "3.8"
