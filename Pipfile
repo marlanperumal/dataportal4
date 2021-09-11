@@ -9,6 +9,9 @@ flask-sqlalchemy = "*"
 flask--migrate = "*"
 psycopg2-binary = "*"
 celery = "*"
+marshmallow = "*"
+flask-marshmallow = "*"
+marshmallow-sqlalchemy = "*"
 
 [dev-packages]
 pytest = "*"
