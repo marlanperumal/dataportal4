@@ -110,8 +110,13 @@ class Field(db.Model):
 class FieldWeight(db.Model):
     __tablename__ = "field_name"
     __table_args__ = (
-        ForeignKeyConstraint(["table_id", "weight_id"], ["meta.table_weight.table_id", "meta.table_weight.weight_id"]),
-        ForeignKeyConstraint(["table_id", "field_id"], ["meta.field.table_id", "meta.field.field_id"]),
+        ForeignKeyConstraint(
+            ["table_id", "weight_id"],
+            ["meta.table_weight.table_id", "meta.table_weight.weight_id"],
+        ),
+        ForeignKeyConstraint(
+            ["table_id", "field_id"], ["meta.field.table_id", "meta.field.field_id"]
+        ),
         {"schema": "meta"},
     )
 
@@ -123,7 +128,9 @@ class FieldWeight(db.Model):
 class Translation(db.Model):
     __tablename__ = "translation"
     __table_args__ = (
-        ForeignKeyConstraint(["table_id", "field_id"], ["meta.field.table_id", "meta.field.field_id"]),
+        ForeignKeyConstraint(
+            ["table_id", "field_id"], ["meta.field.table_id", "meta.field.field_id"]
+        ),
         {"schema": "meta"},
     )
 

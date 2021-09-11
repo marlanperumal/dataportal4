@@ -17,6 +17,7 @@ def client() -> FlaskClient:
         with app.app_context():
             db.drop_all()
             db.create_all()
+            db.session.execute("pragma foreign_keys=on")
             yield client
 
 
@@ -28,19 +29,6 @@ def default_organisation():
 
 
 @pytest.fixture
-def regular_user(default_organisation: Organisation):
-    data = {
-        "first_name": "test",
-        "last_name": "user",
-        "email": "test@test.com",
-        "organisation_id": default_organisation.id,
-        "is_admin": False,
-    }
-    user: User = new_user(data)
-    return user
-
-
-@pytest.fixture
 def admin_user(default_organisation: Organisation):
     data = {
         "first_name": "admin",
@@ -48,6 +36,19 @@ def admin_user(default_organisation: Organisation):
         "email": "admin@test.com",
         "organisation_id": default_organisation.id,
         "is_admin": True,
+    }
+    user: User = new_user(data)
+    return user
+
+
+@pytest.fixture
+def regular_user(default_organisation: Organisation):
+    data = {
+        "first_name": "test",
+        "last_name": "user",
+        "email": "test@test.com",
+        "organisation_id": default_organisation.id,
+        "is_admin": False,
     }
     user: User = new_user(data)
     return user

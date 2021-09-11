@@ -43,8 +43,20 @@ def upgrade():
         sa.PrimaryKeyConstraint("id", name=op.f("pk_dataset")),
         schema="meta",
     )
-    op.create_index(op.f("ix_meta_dataset_is_hidden"), "dataset", ["is_hidden"], unique=False, schema="meta")
-    op.create_index(op.f("ix_meta_dataset_is_locked"), "dataset", ["is_locked"], unique=False, schema="meta")
+    op.create_index(
+        op.f("ix_meta_dataset_is_hidden"),
+        "dataset",
+        ["is_hidden"],
+        unique=False,
+        schema="meta",
+    )
+    op.create_index(
+        op.f("ix_meta_dataset_is_locked"),
+        "dataset",
+        ["is_locked"],
+        unique=False,
+        schema="meta",
+    )
     op.create_table(
         "service",
         sa.Column("id", sa.String(), nullable=False),
@@ -61,12 +73,20 @@ def upgrade():
         sa.Column("is_user", sa.Boolean(), nullable=True),
         sa.Column("is_default", sa.Boolean(), nullable=True),
         sa.ForeignKeyConstraint(
-            ["organisation_id"], ["auth.organisation.id"], name=op.f("fk_group_organisation_id_organisation")
+            ["organisation_id"],
+            ["auth.organisation.id"],
+            name=op.f("fk_group_organisation_id_organisation"),
         ),
         sa.PrimaryKeyConstraint("id", name=op.f("pk_group")),
         schema="auth",
     )
-    op.create_index(op.f("ix_auth_group_organisation_id"), "group", ["organisation_id"], unique=False, schema="auth")
+    op.create_index(
+        op.f("ix_auth_group_organisation_id"),
+        "group",
+        ["organisation_id"],
+        unique=False,
+        schema="auth",
+    )
     op.create_table(
         "subscription",
         sa.Column("id", sa.Integer(), nullable=False),
@@ -77,20 +97,60 @@ def upgrade():
         sa.Column("start_date", sa.Date(), nullable=True),
         sa.Column("end_date", sa.Date(), nullable=True),
         sa.ForeignKeyConstraint(
-            ["organisation_id"], ["auth.organisation.id"], name=op.f("fk_subscription_organisation_id_organisation")
+            ["organisation_id"],
+            ["auth.organisation.id"],
+            name=op.f("fk_subscription_organisation_id_organisation"),
         ),
-        sa.ForeignKeyConstraint(["package_id"], ["auth.package.id"], name=op.f("fk_subscription_package_id_package")),
+        sa.ForeignKeyConstraint(
+            ["package_id"],
+            ["auth.package.id"],
+            name=op.f("fk_subscription_package_id_package"),
+        ),
         sa.PrimaryKeyConstraint("id", name=op.f("pk_subscription")),
         schema="auth",
     )
-    op.create_index(op.f("ix_auth_subscription_end_date"), "subscription", ["end_date"], unique=False, schema="auth")
-    op.create_index(op.f("ix_auth_subscription_is_active"), "subscription", ["is_active"], unique=False, schema="auth")
-    op.create_index(op.f("ix_auth_subscription_is_current"), "subscription", ["is_current"], unique=False, schema="auth")
     op.create_index(
-        op.f("ix_auth_subscription_organisation_id"), "subscription", ["organisation_id"], unique=False, schema="auth"
+        op.f("ix_auth_subscription_end_date"),
+        "subscription",
+        ["end_date"],
+        unique=False,
+        schema="auth",
     )
-    op.create_index(op.f("ix_auth_subscription_package_id"), "subscription", ["package_id"], unique=False, schema="auth")
-    op.create_index(op.f("ix_auth_subscription_start_date"), "subscription", ["start_date"], unique=False, schema="auth")
+    op.create_index(
+        op.f("ix_auth_subscription_is_active"),
+        "subscription",
+        ["is_active"],
+        unique=False,
+        schema="auth",
+    )
+    op.create_index(
+        op.f("ix_auth_subscription_is_current"),
+        "subscription",
+        ["is_current"],
+        unique=False,
+        schema="auth",
+    )
+    op.create_index(
+        op.f("ix_auth_subscription_organisation_id"),
+        "subscription",
+        ["organisation_id"],
+        unique=False,
+        schema="auth",
+    )
+    op.create_index(
+        op.f("ix_auth_subscription_package_id"),
+        "subscription",
+        ["package_id"],
+        unique=False,
+        schema="auth",
+    )
+    op.create_index(
+        op.f("ix_auth_subscription_start_date"),
+        "subscription",
+        ["start_date"],
+        unique=False,
+        schema="auth",
+    )
     op.create_table(
         "user",
         sa.Column("id", sa.Integer(), nullable=False),
@@ -100,12 +160,20 @@ def upgrade():
         sa.Column("organisation_id", sa.Integer(), nullable=True),
         sa.Column("is_admin", sa.Boolean(), nullable=True),
         sa.ForeignKeyConstraint(
-            ["organisation_id"], ["auth.organisation.id"], name=op.f("fk_user_organisation_id_organisation")
+            ["organisation_id"],
+            ["auth.organisation.id"],
+            name=op.f("fk_user_organisation_id_organisation"),
         ),
         sa.PrimaryKeyConstraint("id", name=op.f("pk_user")),
         schema="auth",
     )
-    op.create_index(op.f("ix_auth_user_organisation_id"), "user", ["organisation_id"], unique=False, schema="auth")
+    op.create_index(
+        op.f("ix_auth_user_organisation_id"),
+        "user",
+        ["organisation_id"],
+        unique=False,
+        schema="auth",
+    )
     op.create_table(
         "table",
         sa.Column("id", sa.String(), nullable=False),
@@ -120,43 +188,95 @@ def upgrade():
         sa.Column("is_hidden", sa.Boolean(), nullable=True),
         sa.Column("is_locked", sa.Boolean(), nullable=True),
         sa.Column("max_filed", sa.Integer(), nullable=True),
-        sa.ForeignKeyConstraint(["dataset_id"], ["meta.dataset.id"], name=op.f("fk_table_dataset_id_dataset")),
-        sa.ForeignKeyConstraint(["service_id"], ["meta.service.id"], name=op.f("fk_table_service_id_service")),
+        sa.ForeignKeyConstraint(
+            ["dataset_id"],
+            ["meta.dataset.id"],
+            name=op.f("fk_table_dataset_id_dataset"),
+        ),
+        sa.ForeignKeyConstraint(
+            ["service_id"],
+            ["meta.service.id"],
+            name=op.f("fk_table_service_id_service"),
+        ),
         sa.PrimaryKeyConstraint("id", name=op.f("pk_table")),
         schema="meta",
     )
-    op.create_index(op.f("ix_meta_table_dataset_id"), "table", ["dataset_id"], unique=False, schema="meta")
-    op.create_index(op.f("ix_meta_table_is_hidden"), "table", ["is_hidden"], unique=False, schema="meta")
-    op.create_index(op.f("ix_meta_table_is_locked"), "table", ["is_locked"], unique=False, schema="meta")
-    op.create_index(op.f("ix_meta_table_service_id"), "table", ["service_id"], unique=False, schema="meta")
+    op.create_index(
+        op.f("ix_meta_table_dataset_id"),
+        "table",
+        ["dataset_id"],
+        unique=False,
+        schema="meta",
+    )
+    op.create_index(
+        op.f("ix_meta_table_is_hidden"),
+        "table",
+        ["is_hidden"],
+        unique=False,
+        schema="meta",
+    )
+    op.create_index(
+        op.f("ix_meta_table_is_locked"),
+        "table",
+        ["is_locked"],
+        unique=False,
+        schema="meta",
+    )
+    op.create_index(
+        op.f("ix_meta_table_service_id"),
+        "table",
+        ["service_id"],
+        unique=False,
+        schema="meta",
+    )
     op.create_table(
         "organisation_group",
         sa.Column("organisation_id", sa.Integer(), nullable=False),
         sa.Column("group_id", sa.Integer(), nullable=False),
-        sa.ForeignKeyConstraint(["group_id"], ["auth.group.id"], name=op.f("fk_organisation_group_group_id_group")),
         sa.ForeignKeyConstraint(
-            ["organisation_id"], ["auth.organisation.id"], name=op.f("fk_organisation_group_organisation_id_organisation")
+            ["group_id"],
+            ["auth.group.id"],
+            name=op.f("fk_organisation_group_group_id_group"),
         ),
-        sa.PrimaryKeyConstraint("organisation_id", "group_id", name=op.f("pk_organisation_group")),
+        sa.ForeignKeyConstraint(
+            ["organisation_id"],
+            ["auth.organisation.id"],
+            name=op.f("fk_organisation_group_organisation_id_organisation"),
+        ),
+        sa.PrimaryKeyConstraint(
+            "organisation_id", "group_id", name=op.f("pk_organisation_group")
+        ),
         schema="auth",
     )
     op.create_table(
         "subscription_group",
         sa.Column("subscription_id", sa.Integer(), nullable=False),
         sa.Column("group_id", sa.Integer(), nullable=False),
-        sa.ForeignKeyConstraint(["group_id"], ["auth.group.id"], name=op.f("fk_subscription_group_group_id_group")),
         sa.ForeignKeyConstraint(
-            ["subscription_id"], ["auth.subscription.id"], name=op.f("fk_subscription_group_subscription_id_subscription")
+            ["group_id"],
+            ["auth.group.id"],
+            name=op.f("fk_subscription_group_group_id_group"),
         ),
-        sa.PrimaryKeyConstraint("subscription_id", "group_id", name=op.f("pk_subscription_group")),
+        sa.ForeignKeyConstraint(
+            ["subscription_id"],
+            ["auth.subscription.id"],
+            name=op.f("fk_subscription_group_subscription_id_subscription"),
+        ),
+        sa.PrimaryKeyConstraint(
+            "subscription_id", "group_id", name=op.f("pk_subscription_group")
+        ),
         schema="auth",
     )
     op.create_table(
         "user_group",
         sa.Column("user_id", sa.Integer(), nullable=False),
         sa.Column("group_id", sa.Integer(), nullable=False),
-        sa.ForeignKeyConstraint(["group_id"], ["auth.group.id"], name=op.f("fk_user_group_group_id_group")),
-        sa.ForeignKeyConstraint(["user_id"], ["auth.user.id"], name=op.f("fk_user_group_user_id_user")),
+        sa.ForeignKeyConstraint(
+            ["group_id"], ["auth.group.id"], name=op.f("fk_user_group_group_id_group")
+        ),
+        sa.ForeignKeyConstraint(
+            ["user_id"], ["auth.user.id"], name=op.f("fk_user_group_user_id_user")
+        ),
         sa.PrimaryKeyConstraint("user_id", "group_id", name=op.f("pk_user_group")),
         schema="auth",
     )
@@ -170,25 +290,61 @@ def upgrade():
         sa.Column("is_multi", sa.Boolean(), nullable=True),
         sa.Column("multi_type", sa.Integer(), nullable=True),
         sa.Column("path", sa.String(), nullable=True),
-        sa.ForeignKeyConstraint(["parent_id"], ["meta.branch.id"], name=op.f("fk_branch_parent_id_branch")),
-        sa.ForeignKeyConstraint(["table_id"], ["meta.table.id"], name=op.f("fk_branch_table_id_table")),
+        sa.ForeignKeyConstraint(
+            ["parent_id"], ["meta.branch.id"], name=op.f("fk_branch_parent_id_branch")
+        ),
+        sa.ForeignKeyConstraint(
+            ["table_id"], ["meta.table.id"], name=op.f("fk_branch_table_id_table")
+        ),
         sa.PrimaryKeyConstraint("id", name=op.f("pk_branch")),
         schema="meta",
     )
-    op.create_index(op.f("ix_meta_branch_is_root"), "branch", ["is_root"], unique=False, schema="meta")
-    op.create_index(op.f("ix_meta_branch_parent_id"), "branch", ["parent_id"], unique=False, schema="meta")
-    op.create_index(op.f("ix_meta_branch_table_id"), "branch", ["table_id"], unique=False, schema="meta")
+    op.create_index(
+        op.f("ix_meta_branch_is_root"),
+        "branch",
+        ["is_root"],
+        unique=False,
+        schema="meta",
+    )
+    op.create_index(
+        op.f("ix_meta_branch_parent_id"),
+        "branch",
+        ["parent_id"],
+        unique=False,
+        schema="meta",
+    )
+    op.create_index(
+        op.f("ix_meta_branch_table_id"),
+        "branch",
+        ["table_id"],
+        unique=False,
+        schema="meta",
+    )
     op.create_table(
         "table_handle",
         sa.Column("id", sa.Integer(), nullable=False),
         sa.Column("table_id", sa.String(), nullable=True),
         sa.Column("handle", sa.String(), nullable=True),
-        sa.ForeignKeyConstraint(["table_id"], ["meta.table.id"], name=op.f("fk_table_handle_table_id_table")),
+        sa.ForeignKeyConstraint(
+            ["table_id"], ["meta.table.id"], name=op.f("fk_table_handle_table_id_table")
+        ),
         sa.PrimaryKeyConstraint("id", name=op.f("pk_table_handle")),
         schema="meta",
     )
-    op.create_index(op.f("ix_meta_table_handle_handle"), "table_handle", ["handle"], unique=False, schema="meta")
-    op.create_index(op.f("ix_meta_table_handle_table_id"), "table_handle", ["table_id"], unique=False, schema="meta")
+    op.create_index(
+        op.f("ix_meta_table_handle_handle"),
+        "table_handle",
+        ["handle"],
+        unique=False,
+        schema="meta",
+    )
+    op.create_index(
+        op.f("ix_meta_table_handle_table_id"),
+        "table_handle",
+        ["table_id"],
+        unique=False,
+        schema="meta",
+    )
     op.create_table(
         "table_weight",
         sa.Column("table_id", sa.String(), nullable=False),
@@ -196,7 +352,9 @@ def upgrade():
         sa.Column("name", sa.String(), nullable=True),
         sa.Column("weight_field", sa.String(), nullable=True),
         sa.Column("index_field", sa.String(), nullable=True),
-        sa.ForeignKeyConstraint(["table_id"], ["meta.table.id"], name=op.f("fk_table_weight_table_id_table")),
+        sa.ForeignKeyConstraint(
+            ["table_id"], ["meta.table.id"], name=op.f("fk_table_weight_table_id_table")
+        ),
         sa.PrimaryKeyConstraint("table_id", "weight_id", name=op.f("pk_table_weight")),
         schema="meta",
     )
@@ -215,17 +373,51 @@ def upgrade():
         sa.Column("is_locked", sa.Boolean(), nullable=True),
         sa.Column("check_weights", sa.Boolean(), nullable=True),
         sa.ForeignKeyConstraint(
-            ["table_handle_id"], ["meta.table_handle.id"], name=op.f("fk_field_table_handle_id_table_handle")
+            ["table_handle_id"],
+            ["meta.table_handle.id"],
+            name=op.f("fk_field_table_handle_id_table_handle"),
         ),
-        sa.ForeignKeyConstraint(["table_id"], ["meta.table.id"], name=op.f("fk_field_table_id_table")),
+        sa.ForeignKeyConstraint(
+            ["table_id"], ["meta.table.id"], name=op.f("fk_field_table_id_table")
+        ),
         sa.PrimaryKeyConstraint("table_id", "field_id", name=op.f("pk_field")),
         schema="meta",
     )
-    op.create_index(op.f("ix_meta_field_branch_id"), "field", ["branch_id"], unique=False, schema="meta")
-    op.create_index(op.f("ix_meta_field_check_weights"), "field", ["check_weights"], unique=False, schema="meta")
-    op.create_index(op.f("ix_meta_field_is_hidden"), "field", ["is_hidden"], unique=False, schema="meta")
-    op.create_index(op.f("ix_meta_field_is_locked"), "field", ["is_locked"], unique=False, schema="meta")
-    op.create_index(op.f("ix_meta_field_table_handle_id"), "field", ["table_handle_id"], unique=False, schema="meta")
+    op.create_index(
+        op.f("ix_meta_field_branch_id"),
+        "field",
+        ["branch_id"],
+        unique=False,
+        schema="meta",
+    )
+    op.create_index(
+        op.f("ix_meta_field_check_weights"),
+        "field",
+        ["check_weights"],
+        unique=False,
+        schema="meta",
+    )
+    op.create_index(
+        op.f("ix_meta_field_is_hidden"),
+        "field",
+        ["is_hidden"],
+        unique=False,
+        schema="meta",
+    )
+    op.create_index(
+        op.f("ix_meta_field_is_locked"),
+        "field",
+        ["is_locked"],
+        unique=False,
+        schema="meta",
+    )
+    op.create_index(
+        op.f("ix_meta_field_table_handle_id"),
+        "field",
+        ["table_handle_id"],
+        unique=False,
+        schema="meta",
+    )
     op.create_table(
         "package_content",
         sa.Column("id", sa.Integer(), nullable=False),
@@ -233,36 +425,82 @@ def upgrade():
         sa.Column("dataset_id", sa.Integer(), nullable=True),
         sa.Column("table_id", sa.Integer(), nullable=True),
         sa.Column("field_id", sa.Integer(), nullable=True),
-        sa.ForeignKeyConstraint(["dataset_id"], ["meta.dataset.id"], name=op.f("fk_package_content_dataset_id_dataset")),
-        sa.ForeignKeyConstraint(["package_id"], ["auth.package.id"], name=op.f("fk_package_content_package_id_package")),
+        sa.ForeignKeyConstraint(
+            ["dataset_id"],
+            ["meta.dataset.id"],
+            name=op.f("fk_package_content_dataset_id_dataset"),
+        ),
+        sa.ForeignKeyConstraint(
+            ["package_id"],
+            ["auth.package.id"],
+            name=op.f("fk_package_content_package_id_package"),
+        ),
         sa.ForeignKeyConstraint(
             ["table_id", "field_id"],
             ["meta.field.table_id", "meta.field.field_id"],
             name=op.f("fk_package_content_table_id_field"),
         ),
-        sa.ForeignKeyConstraint(["table_id"], ["meta.table.id"], name=op.f("fk_package_content_table_id_table")),
+        sa.ForeignKeyConstraint(
+            ["table_id"],
+            ["meta.table.id"],
+            name=op.f("fk_package_content_table_id_table"),
+        ),
         sa.PrimaryKeyConstraint("id", name=op.f("pk_package_content")),
-        sa.UniqueConstraint("package_id", "dataset_id", "table_id", "field_id", name=op.f("uq_package_content_package_id")),
+        sa.UniqueConstraint(
+            "package_id",
+            "dataset_id",
+            "table_id",
+            "field_id",
+            name=op.f("uq_package_content_package_id"),
+        ),
         schema="auth",
     )
-    op.create_index(op.f("ix_auth_package_content_dataset_id"), "package_content", ["dataset_id"], unique=False, schema="auth")
-    op.create_index(op.f("ix_auth_package_content_field_id"), "package_content", ["field_id"], unique=False, schema="auth")
-    op.create_index(op.f("ix_auth_package_content_package_id"), "package_content", ["package_id"], unique=False, schema="auth")
-    op.create_index(op.f("ix_auth_package_content_table_id"), "package_content", ["table_id"], unique=False, schema="auth")
+    op.create_index(
+        op.f("ix_auth_package_content_dataset_id"),
+        "package_content",
+        ["dataset_id"],
+        unique=False,
+        schema="auth",
+    )
+    op.create_index(
+        op.f("ix_auth_package_content_field_id"),
+        "package_content",
+        ["field_id"],
+        unique=False,
+        schema="auth",
+    )
+    op.create_index(
+        op.f("ix_auth_package_content_package_id"),
+        "package_content",
+        ["package_id"],
+        unique=False,
+        schema="auth",
+    )
+    op.create_index(
+        op.f("ix_auth_package_content_table_id"),
+        "package_content",
+        ["table_id"],
+        unique=False,
+        schema="auth",
+    )
     op.create_table(
         "field_name",
         sa.Column("table_id", sa.String(), nullable=False),
         sa.Column("weight_id", sa.String(), nullable=False),
         sa.Column("field_id", sa.String(), nullable=False),
         sa.ForeignKeyConstraint(
-            ["table_id", "field_id"], ["meta.field.table_id", "meta.field.field_id"], name=op.f("fk_field_name_table_id_field")
+            ["table_id", "field_id"],
+            ["meta.field.table_id", "meta.field.field_id"],
+            name=op.f("fk_field_name_table_id_field"),
         ),
         sa.ForeignKeyConstraint(
             ["table_id", "weight_id"],
             ["meta.table_weight.table_id", "meta.table_weight.weight_id"],
             name=op.f("fk_field_name_table_id_table_weight"),
         ),
-        sa.PrimaryKeyConstraint("table_id", "weight_id", "field_id", name=op.f("pk_field_name")),
+        sa.PrimaryKeyConstraint(
+            "table_id", "weight_id", "field_id", name=op.f("pk_field_name")
+        ),
         schema="meta",
     )
     op.create_table(
@@ -274,9 +512,13 @@ def upgrade():
         sa.Column("sort_order", sa.Integer(), nullable=True),
         sa.Column("is_na", sa.Boolean(), nullable=True),
         sa.ForeignKeyConstraint(
-            ["table_id", "field_id"], ["meta.field.table_id", "meta.field.field_id"], name=op.f("fk_translation_table_id_field")
+            ["table_id", "field_id"],
+            ["meta.field.table_id", "meta.field.field_id"],
+            name=op.f("fk_translation_table_id_field"),
         ),
-        sa.PrimaryKeyConstraint("table_id", "field_id", "level_id", name=op.f("pk_translation")),
+        sa.PrimaryKeyConstraint(
+            "table_id", "field_id", "level_id", name=op.f("pk_translation")
+        ),
         schema="meta",
     )
     # ### end Alembic commands ###
@@ -286,20 +528,44 @@ def downgrade():
     # ### commands auto generated by Alembic - please adjust! ###
     op.drop_table("translation", schema="meta")
     op.drop_table("field_name", schema="meta")
-    op.drop_index(op.f("ix_auth_package_content_table_id"), table_name="package_content", schema="auth")
-    op.drop_index(op.f("ix_auth_package_content_package_id"), table_name="package_content", schema="auth")
-    op.drop_index(op.f("ix_auth_package_content_field_id"), table_name="package_content", schema="auth")
-    op.drop_index(op.f("ix_auth_package_content_dataset_id"), table_name="package_content", schema="auth")
+    op.drop_index(
+        op.f("ix_auth_package_content_table_id"),
+        table_name="package_content",
+        schema="auth",
+    )
+    op.drop_index(
+        op.f("ix_auth_package_content_package_id"),
+        table_name="package_content",
+        schema="auth",
+    )
+    op.drop_index(
+        op.f("ix_auth_package_content_field_id"),
+        table_name="package_content",
+        schema="auth",
+    )
+    op.drop_index(
+        op.f("ix_auth_package_content_dataset_id"),
+        table_name="package_content",
+        schema="auth",
+    )
     op.drop_table("package_content", schema="auth")
-    op.drop_index(op.f("ix_meta_field_table_handle_id"), table_name="field", schema="meta")
+    op.drop_index(
+        op.f("ix_meta_field_table_handle_id"), table_name="field", schema="meta"
+    )
     op.drop_index(op.f("ix_meta_field_is_locked"), table_name="field", schema="meta")
     op.drop_index(op.f("ix_meta_field_is_hidden"), table_name="field", schema="meta")
-    op.drop_index(op.f("ix_meta_field_check_weights"), table_name="field", schema="meta")
+    op.drop_index(
+        op.f("ix_meta_field_check_weights"), table_name="field", schema="meta"
+    )
     op.drop_index(op.f("ix_meta_field_branch_id"), table_name="field", schema="meta")
     op.drop_table("field", schema="meta")
     op.drop_table("table_weight", schema="meta")
-    op.drop_index(op.f("ix_meta_table_handle_table_id"), table_name="table_handle", schema="meta")
-    op.drop_index(op.f("ix_meta_table_handle_handle"), table_name="table_handle", schema="meta")
+    op.drop_index(
+        op.f("ix_meta_table_handle_table_id"), table_name="table_handle", schema="meta"
+    )
+    op.drop_index(
+        op.f("ix_meta_table_handle_handle"), table_name="table_handle", schema="meta"
+    )
     op.drop_table("table_handle", schema="meta")
     op.drop_index(op.f("ix_meta_branch_table_id"), table_name="branch", schema="meta")
     op.drop_index(op.f("ix_meta_branch_parent_id"), table_name="branch", schema="meta")
@@ -313,20 +579,48 @@ def downgrade():
     op.drop_index(op.f("ix_meta_table_is_hidden"), table_name="table", schema="meta")
     op.drop_index(op.f("ix_meta_table_dataset_id"), table_name="table", schema="meta")
     op.drop_table("table", schema="meta")
-    op.drop_index(op.f("ix_auth_user_organisation_id"), table_name="user", schema="auth")
+    op.drop_index(
+        op.f("ix_auth_user_organisation_id"), table_name="user", schema="auth"
+    )
     op.drop_table("user", schema="auth")
-    op.drop_index(op.f("ix_auth_subscription_start_date"), table_name="subscription", schema="auth")
-    op.drop_index(op.f("ix_auth_subscription_package_id"), table_name="subscription", schema="auth")
-    op.drop_index(op.f("ix_auth_subscription_organisation_id"), table_name="subscription", schema="auth")
-    op.drop_index(op.f("ix_auth_subscription_is_current"), table_name="subscription", schema="auth")
-    op.drop_index(op.f("ix_auth_subscription_is_active"), table_name="subscription", schema="auth")
-    op.drop_index(op.f("ix_auth_subscription_end_date"), table_name="subscription", schema="auth")
+    op.drop_index(
+        op.f("ix_auth_subscription_start_date"),
+        table_name="subscription",
+        schema="auth",
+    )
+    op.drop_index(
+        op.f("ix_auth_subscription_package_id"),
+        table_name="subscription",
+        schema="auth",
+    )
+    op.drop_index(
+        op.f("ix_auth_subscription_organisation_id"),
+        table_name="subscription",
+        schema="auth",
+    )
+    op.drop_index(
+        op.f("ix_auth_subscription_is_current"),
+        table_name="subscription",
+        schema="auth",
+    )
+    op.drop_index(
+        op.f("ix_auth_subscription_is_active"), table_name="subscription", schema="auth"
+    )
+    op.drop_index(
+        op.f("ix_auth_subscription_end_date"), table_name="subscription", schema="auth"
+    )
     op.drop_table("subscription", schema="auth")
-    op.drop_index(op.f("ix_auth_group_organisation_id"), table_name="group", schema="auth")
+    op.drop_index(
+        op.f("ix_auth_group_organisation_id"), table_name="group", schema="auth"
+    )
     op.drop_table("group", schema="auth")
     op.drop_table("service", schema="meta")
-    op.drop_index(op.f("ix_meta_dataset_is_locked"), table_name="dataset", schema="meta")
-    op.drop_index(op.f("ix_meta_dataset_is_hidden"), table_name="dataset", schema="meta")
+    op.drop_index(
+        op.f("ix_meta_dataset_is_locked"), table_name="dataset", schema="meta"
+    )
+    op.drop_index(
+        op.f("ix_meta_dataset_is_hidden"), table_name="dataset", schema="meta"
+    )
     op.drop_table("dataset", schema="meta")
     op.drop_table("package", schema="auth")
     op.drop_table("organisation", schema="auth")

@@ -19,6 +19,7 @@ flake8 = "*"
 black = "*"
 ipykernel = "*"
 pre-commit = "*"
+pytest-cov = "*"
 
 [requires]
 python_version = "3.8"
