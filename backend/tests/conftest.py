@@ -5,8 +5,10 @@ from .. import create_app
 from ..config import TestConfig
 from ..models import db
 from ..models.auth import User, Organisation
+from ..models.meta import Dataset
 from ..methods.auth.users import new_user
 from ..methods.auth.organisations import new_organisation
+from ..methods.meta.datasets import new_dataset
 
 app = create_app(TestConfig)
 
@@ -52,3 +54,16 @@ def regular_user(default_organisation: Organisation):
     }
     user: User = new_user(data)
     return user
+
+
+@pytest.fixture
+def default_dataset():
+    data = {
+        "name": "Dataset 1",
+        "collection": "Collection 1",
+        "priority": 100,
+        "is_hidden": False,
+        "is_locked": False,
+    }
+    dataset: Dataset = new_dataset(data)
+    return dataset

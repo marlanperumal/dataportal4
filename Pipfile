@@ -12,6 +12,7 @@ celery = "*"
 marshmallow = "*"
 flask-marshmallow = "*"
 marshmallow-sqlalchemy = "*"
+pandas = "*"
 
 [dev-packages]
 pytest = "*"
