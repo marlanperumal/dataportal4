@@ -10,12 +10,19 @@ from ..models.meta import Field, TableWeight
 
 
 class Worker:
-    def pivot(
-        self, rows: List[Field], cols: List[Field], weight: TableWeight, base: Field
-    ):
+    def get_pivot_data(
+        self, fields: List[Field], weight: TableWeight, value: Optional[Field] = None
+    ) -> pd.DataFrame:
         pass
 
-    def trend(self, fields: List[Field], weight: TableWeight, base: Field):
+    def pivot(
+        self, rows: List[Field], cols: List[Field], weight: TableWeight, base: Field
+    ) -> pd.DataFrame:
+        pass
+
+    def trend(
+        self, fields: List[Field], weight: TableWeight, base: Field
+    ) -> pd.DataFrame:
         pass
 
 
@@ -97,3 +104,32 @@ class PostgreSQLWorker(SQLWorker):
     ):
         conn_uri = f"postgresql://{user}:{password}@{host}:{port}/{db}"
         super().__init__(conn_uri)
+
+
+class PandasWorker(Worker):
+    def __init__(self, df: pd.DataFrame):
+        self.df = df
+
+    def get_pivot_data(
+        self, fields: List[Field], weight: TableWeight, value: Optional[Field] = None
+    ) -> pd.DataFrame:
+        weight_field = weight.weight_field.handle
+        value_field = value.handle
+
+        def agg(df: pd.DataFrame):
+            d = {
+                "weight_sum": df[weight_field].sum(),
+                "value_sum": (df[weight_field] * df[value_field]).sum(),
+                "zero_sum": df[df[value_field].isna()][weight_field].sum(),
+            }
+            return pd.Series(d, index=list(d))
+
+        result = self.df.groupby(
+            [field.handle for field in fields], as_index=False
+        ).apply(agg)
+        return result
+
+
+class CSVWorker(PandasWorker):
+    def __init__(self, filepath: str):
+        self.df = pd.read_csv(filepath)
