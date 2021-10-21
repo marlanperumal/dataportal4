@@ -1,7 +1,7 @@
 from typing import List
 from ...models import db
 from ...models.auth import Group
-from ...schema.auth import group_schema, groups_schema
+from ...schema.auth import group_schema
 
 
 def fetch_group(group_id) -> Group:
@@ -14,15 +14,13 @@ def fetch_groups() -> List[Group]:
     return groups
 
 
-def new_group(data) -> Group:
-    group: Group = group_schema.load(data)
+def new_group(group: Group) -> Group:
     db.session.add(group)
     db.session.flush()
     return group
 
 
-def new_groups(data) -> List[Group]:
-    groups: List[Group] = groups_schema.load(data)
+def new_groups(groups: List[Group]) -> List[Group]:
     db.session.add_all(groups)
     db.session.flush()
     return groups

@@ -14,11 +14,11 @@ def test_connection():
 def test_get_pivot_data(client):
     worker = SQLWorker("sqlite:///:memory:")
 
-    filename_1 = "backend/tests/data/simple_data_1.csv"
+    filename_1 = "tests/data/simple_data_1.csv"
     df = pd.read_csv(filename_1)
     df.to_sql("table1", worker.engine)
 
-    filename_2 = "backend/tests/data/simple_data_2.csv"
+    filename_2 = "tests/data/simple_data_2.csv"
     df = pd.read_csv(filename_2)
     df.to_sql("table2", worker.engine)
 

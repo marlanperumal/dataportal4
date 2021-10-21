@@ -1,4 +1,5 @@
-from typing import List, Optional
+from typing import List, Dict, Optional
+from dataclasses import dataclass
 import pandas as pd
 from sqlalchemy.engine.base import Engine
 from sqlalchemy.engine import create_engine
@@ -39,21 +40,23 @@ class SQLWorker(Worker):
     ) -> pd.DataFrame:
         metadata = MetaData()
 
-        field_columns = []
-        tables = {}
+        @dataclass
+        class TableMeta:
+            table: SqlTable
+            index_column: Column
 
-        def create_column(field: List, tables: dict) -> Column:
+        field_columns = []
+        tables: Dict[str, TableMeta] = {}
+
+        def create_column(field: Field, tables: Dict[str, TableMeta]) -> Column:
             table_handle = field.table_handle
             if table_handle.handle in tables:
-                table = tables[table_handle.handle]["table"]
+                table = tables[table_handle.handle].table
             else:
                 table = SqlTable(table_handle.handle, metadata)
                 index_column = Column(table_handle.index_handle)
                 table.append_column(index_column)
-                tables[table_handle.handle] = {
-                    "table": table,
-                    "index_column": index_column,
-                }
+                tables[table_handle.handle] = TableMeta(table, index_column)
             column = Column(field.handle)
             table.append_column(column)
             return column
@@ -80,11 +83,10 @@ class SQLWorker(Worker):
         table_list = list(tables.values())
         for i, table in enumerate(table_list):
             if i == 0:
-                query = query.select_from(table["table"])
+                query = query.select_from(table.table)
             else:
                 query = query.join(
-                    table["table"],
-                    table_list[0]["index_column"] == table["index_column"],
+                    table.table, table_list[0].index_column == table.index_column
                 )
 
         query = query.group_by(*field_columns).order_by(*field_columns)

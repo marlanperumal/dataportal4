@@ -27,6 +27,7 @@ def client() -> FlaskClient:
 def default_organisation():
     data = {"name": "Default Organisation"}
     organisation: Organisation = new_organisation(data)
+    db.session.commit()
     return organisation
 
 
@@ -40,6 +41,8 @@ def admin_user(default_organisation: Organisation):
         "is_admin": True,
     }
     user: User = new_user(data)
+    db.session.add(user)
+    db.session.commit()
     return user
 
 
@@ -53,6 +56,8 @@ def regular_user(default_organisation: Organisation):
         "is_admin": False,
     }
     user: User = new_user(data)
+    db.session.add(user)
+    db.session.commit()
     return user
 
 

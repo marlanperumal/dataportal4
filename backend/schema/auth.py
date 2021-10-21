@@ -9,7 +9,7 @@ class UserSchema(ma.SQLAlchemyAutoSchema):
         include_fk = True
 
     id = ma.auto_field(dump_only=True)
-    groups = ma.auto_field(dump=True)
+    groups = ma.auto_field(dump_only=True)
 
 
 user_schema = UserSchema()

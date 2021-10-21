@@ -48,7 +48,7 @@ def result_template() -> pd.DataFrame:
 
 
 def test_connection():
-    df = pd.read_csv("backend/tests/data/simple_data_0.csv")
+    df = pd.read_csv("tests/data/simple_data_0.csv")
     worker = PandasWorker(df)
     assert len(worker.df) == 3
 
@@ -56,7 +56,7 @@ def test_connection():
 def test_pandas_get_pivot_data(
     table_weight: TableWeight, fields: List[Field], result_template: pd.DataFrame
 ):
-    df = pd.read_csv("backend/tests/data/simple_data_0.csv")
+    df = pd.read_csv("tests/data/simple_data_0.csv")
     worker = PandasWorker(df)
 
     df = worker.get_pivot_data(fields=fields[2:4], weight=table_weight, value=fields[4])
@@ -67,7 +67,7 @@ def test_pandas_get_pivot_data(
 def test_csv_get_pivot_data(
     table_weight: TableWeight, fields: List[Field], result_template: pd.DataFrame
 ):
-    worker = CSVWorker("backend/tests/data/simple_data_0.csv")
+    worker = CSVWorker("tests/data/simple_data_0.csv")
 
     df = worker.get_pivot_data(fields=fields[2:4], weight=table_weight, value=fields[4])
 

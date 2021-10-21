@@ -6,13 +6,14 @@ name = "pypi"
 [packages]
 sqlalchemy = "*"
 flask-sqlalchemy = "*"
-flask--migrate = "*"
 psycopg2-binary = "*"
 celery = "*"
 marshmallow = "*"
 flask-marshmallow = "*"
 marshmallow-sqlalchemy = "*"
 pandas = "*"
+flask-migrate = "*"
+flask-smorest = "*"
 
 [dev-packages]
 pytest = "*"
@@ -21,9 +22,10 @@ black = "*"
 ipykernel = "*"
 pre-commit = "*"
 pytest-cov = "*"
+python-dotenv = "*"
 
 [requires]
-python_version = "3.8"
+python_version = "3.10"
 
 [pipenv]
 allow_prereleases = true

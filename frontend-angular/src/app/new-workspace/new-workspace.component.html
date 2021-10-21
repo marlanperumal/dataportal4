@@ -1,0 +1,14 @@
+<mat-grid-list cols="6" rowHeight="140px">
+  <mat-grid-tile *ngFor="let option of options">
+    <button mat-raised-button color="accent" class="workspace-action">
+      {{option}}
+    </button>
+  </mat-grid-tile>
+</mat-grid-list>
+<mat-card>
+  <mat-card-header>
+    <mat-card-subtitle>
+      Recently Saved Workspaces
+    </mat-card-subtitle>
+  </mat-card-header>
+</mat-card>
