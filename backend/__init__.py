@@ -5,7 +5,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from .methods import exceptions
 from .models import db, migrate
 from .schema import ma
-from .schema.auth import UserSchema
+from .schema.auth import UserSchema, OrganisationSchema
 from .routes import api, errors
 from .routes.auth import users, organisations
 
@@ -22,6 +22,9 @@ def register_error_handlers(app: Flask):
 
 def register_apispec_components(api: Api):
     api.spec.components.schema("UserEdit", schema=UserSchema(partial=True))
+    api.spec.components.schema(
+        "OrganisationEdit", schema=OrganisationSchema(partial=True)
+    )
 
 
 def create_app(Config) -> Flask:

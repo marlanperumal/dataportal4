@@ -1,13 +1,12 @@
-from typing import List
 from flask_smorest import Blueprint
 from flask.views import MethodView
 
+from .. import SQLCursorPage
 from ...schema.auth import OrganisationSchema
 from ...models.auth import Organisation
 from ...models import db
 from ...methods.auth.organisations import (
     fetch_organisation,
-    fetch_organisations,
     edit_organisation,
     remove_organisation,
 )
@@ -17,11 +16,14 @@ api = Blueprint("Auth: Organisations", __name__, description="Client Organisatio
 
 @api.route("")
 class Organisations(MethodView):
+    @api.arguments(
+        OrganisationSchema(partial=True, load_instance=False), location="query"
+    )
     @api.response(200, OrganisationSchema(many=True))
-    def get(self):
+    @api.paginate(SQLCursorPage)
+    def get(self, filter_args):
         """Get a list of all organisations"""
-        organisations: List[Organisation] = fetch_organisations()
-        return organisations
+        return Organisation.query.order_by("id").filter_by(**filter_args)
 
     @api.arguments(OrganisationSchema)
     @api.response(201, OrganisationSchema)

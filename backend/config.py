@@ -7,10 +7,15 @@ class Config:
     SQLALCHEMY_ENGINE_OPTIONS = {
         "future": True,
         "execution_options": {
-            "schema_translate_map": {"auth": None, "meta": None, "space": None}
+            "schema_translate_map": {
+                "auth": None,
+                "meta": None,
+                "space": None,
+                "sys": None,
+            }
         },
     }
-    JSON_SORT_KEYS = False
+    JSON_SORT_KEYS = True
     DATA_FOLDER = "data"
     API_TITLE = "Dataportal 4 API"
     API_VERSION = "v0.1"
@@ -22,7 +27,14 @@ class Config:
     OPENAPI_REDOC_URL = "https://rebilly.github.io/ReDoc/releases/v1.x.x/redoc.min.js"
     OPENAPI_RAPIDOC_PATH = "/rapidoc"
     OPENAPI_RAPIDOC_URL = "https://unpkg.com/rapidoc/dist/rapidoc-min.js"
-    OPENAPI_RAPIDOC_CONFIG = {"theme": "dark"}
+    OPENAPI_RAPIDOC_CONFIG = {
+        "theme": "dark",
+        "render-style": "read",
+        "layout": "row",
+        "schema-style": "tree",
+        "default-schema-tab": "example",
+        "primary-color": "#1A79FF",
+    }
 
 
 class TestConfig:
@@ -31,7 +43,12 @@ class TestConfig:
     SQLALCHEMY_ENGINE_OPTIONS = {
         "future": True,
         "execution_options": {
-            "schema_translate_map": {"auth": None, "meta": None, "space": None}
+            "schema_translate_map": {
+                "auth": None,
+                "meta": None,
+                "space": None,
+                "sys": None,
+            }
         },
     }
     DATA_FOLDER = "data"

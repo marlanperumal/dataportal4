@@ -8,8 +8,8 @@ def handle_sqlalchemy_error(e: SQLAlchemyError):
     db.session.rollback()
     return (
         jsonify(
-            message=str(e.orig),
-            errors={"sqlalchemy": str(e)},
+            message=str(e._message()),
+            errors={"sqlalchemy": str(e).split("\n")},
             code=409,
             status="Conflict",
         ),

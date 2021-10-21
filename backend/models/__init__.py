@@ -15,4 +15,4 @@ db = SQLAlchemy(metadata=metadata)
 migrate = Migrate(include_schemas=False)
 
 
-from . import auth, meta, space  # noqa: E402,F401
+from . import auth, meta, space, sys  # noqa: E402,F401

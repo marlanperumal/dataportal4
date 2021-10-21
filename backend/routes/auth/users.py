@@ -1,7 +1,9 @@
 from flask_smorest import Blueprint
 from flask.views import MethodView
 
-from ...methods.auth.users import edit_user, fetch_user, fetch_users, remove_user
+from .. import SQLCursorPage
+
+from ...methods.auth.users import edit_user, fetch_user, remove_user
 from ...schema.auth import UserSchema
 from ...models.auth import User
 from ...models import db
@@ -11,11 +13,12 @@ api = Blueprint("Auth: Users", __name__, description="Application Users")
 
 @api.route("")
 class Users(MethodView):
+    @api.arguments(UserSchema(partial=True, load_instance=False), location="query")
     @api.response(200, UserSchema(many=True))
-    def get(self):
+    @api.paginate(SQLCursorPage)
+    def get(self, filter_args):
         """Get a list of all users"""
-        users: list[User] = fetch_users()
-        return users
+        return User.query.order_by("id").filter_by(**filter_args)
 
     @api.arguments(UserSchema)
     @api.response(201, UserSchema)
