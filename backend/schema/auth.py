@@ -1,3 +1,4 @@
+from marshmallow import fields
 from . import ma
 from ..models.auth import User, Organisation, Group, GroupUser
 
@@ -7,9 +8,11 @@ class UserSchema(ma.SQLAlchemyAutoSchema):
         model = User
         load_instance = True
         include_fk = True
+        exclude = ["password_hash"]
 
     id = ma.auto_field(dump_only=True)
     groups = ma.auto_field(dump_only=True)
+    password = fields.Str(load_only=True)
 
 
 user_schema = UserSchema()

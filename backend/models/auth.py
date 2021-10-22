@@ -9,6 +9,7 @@ from sqlalchemy import (
     ForeignKeyConstraint,
 )
 from sqlalchemy.orm import relationship, backref
+from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 
 
@@ -70,6 +71,7 @@ class User(db.Model):
     first_name = Column(String)
     last_name = Column(String)
     email = Column(String, unique=True, nullable=False)
+    password_hash = db.Column(db.String(128))
     organisation_id = Column(Integer, ForeignKey("auth.organisation.id"), index=True)
     is_admin = Column(Boolean, default=False)
 
@@ -90,6 +92,12 @@ class User(db.Model):
         )
         self.groups.append(organisation_group)
         self.groups.append(user_group)
+
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
 
 
 class Package(db.Model):

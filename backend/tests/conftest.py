@@ -32,13 +32,14 @@ def default_organisation():
 
 
 @pytest.fixture
-def admin_user(default_organisation: Organisation):
+def admin_user(default_organisation: Organisation) -> User:
     data = {
         "first_name": "admin",
         "last_name": "user",
         "email": "admin@test.com",
         "organisation_id": default_organisation.id,
         "is_admin": True,
+        "password": "admin_password",
     }
     user: User = new_user(data)
     db.session.add(user)
@@ -47,13 +48,14 @@ def admin_user(default_organisation: Organisation):
 
 
 @pytest.fixture
-def regular_user(default_organisation: Organisation):
+def regular_user(default_organisation: Organisation) -> Organisation:
     data = {
         "first_name": "test",
         "last_name": "user",
         "email": "test@test.com",
         "organisation_id": default_organisation.id,
         "is_admin": False,
+        "password": "regular_password",
     }
     user: User = new_user(data)
     db.session.add(user)
@@ -62,7 +64,7 @@ def regular_user(default_organisation: Organisation):
 
 
 @pytest.fixture
-def default_dataset():
+def default_dataset() -> Dataset:
     data = {
         "name": "Dataset 1",
         "collection": "Collection 1",

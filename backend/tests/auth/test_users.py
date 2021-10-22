@@ -53,6 +53,7 @@ def test_new_user(client: FlaskClient, default_organisation: Organisation):
         "email": "test@test.com",
         "organisation_id": default_organisation.id,
         "is_admin": False,
+        "password": "password",
     }
 
     user: User = new_user(data)
@@ -77,6 +78,7 @@ def test_new_user_route(client: FlaskClient, default_organisation: Organisation)
         "email": "test@test.com",
         "organisation_id": default_organisation.id,
         "is_admin": False,
+        "password": "password",
     }
 
     response = client.post("/auth/users", json=request_data)
@@ -98,6 +100,7 @@ def test_new_users(client: FlaskClient, default_organisation: Organisation):
         "email": "admin@test.com",
         "organisation_id": default_organisation.id,
         "is_admin": True,
+        "password": "password",
     }
 
     regular_data = {
@@ -106,6 +109,7 @@ def test_new_users(client: FlaskClient, default_organisation: Organisation):
         "email": "test@test.com",
         "organisation_id": default_organisation.id,
         "is_admin": False,
+        "password": "password",
     }
 
     users: list[User] = new_users([admin_data, regular_data])

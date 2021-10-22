@@ -1,7 +1,12 @@
 from ..exceptions import NotFoundError
 from ...models import db
 from ...models.auth import Group, User, GroupUser
-from ...schema.auth import user_schema, users_schema
+from ...schema.auth import user_schema
+
+
+def fetch_user_by_email(email) -> User:
+    user: User = User.query.filter_by(email=email).first()
+    return user
 
 
 def fetch_user(user_id) -> User:
@@ -27,14 +32,15 @@ def fetch_user_group(user: User) -> Group:
 
 
 def new_user(data: dict) -> User:
+    password = data.pop("password")
     user: User = user_schema.load(data)
+    user.set_password(password)
     db.session.add(user)
     return user
 
 
 def new_users(data: list[dict]) -> list[User]:
-    users: list[User] = users_schema.load(data)
-    db.session.add_all(users)
+    users: list[User] = [new_user(d) for d in data]
     return users
 
 

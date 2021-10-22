@@ -3,7 +3,7 @@ from flask.views import MethodView
 
 from .. import SQLCursorPage
 
-from ...methods.auth.users import edit_user, fetch_user, remove_user
+from ...methods.auth.users import edit_user, fetch_user, new_user, remove_user
 from ...schema.auth import UserSchema
 from ...models.auth import User
 from ...models import db
@@ -16,15 +16,15 @@ class Users(MethodView):
     @api.arguments(UserSchema(partial=True, load_instance=False), location="query")
     @api.response(200, UserSchema(many=True))
     @api.paginate(SQLCursorPage)
-    def get(self, filter_args):
+    def get(self, filter_args: dict):
         """Get a list of all users"""
         return User.query.order_by("id").filter_by(**filter_args)
 
-    @api.arguments(UserSchema)
+    @api.arguments(UserSchema(load_instance=False))
     @api.response(201, UserSchema)
-    def post(self, user: User):
+    def post(self, data: dict):
         """Add a new user"""
-        db.session.add(user)
+        user = new_user(data)
         db.session.commit()
         return user
 
@@ -40,7 +40,7 @@ class UsersByBatch(MethodView):
         return users
 
 
-@api.route("/<user_id>")
+@api.route("/<int:user_id>")
 class UsersById(MethodView):
     @api.response(200, UserSchema)
     def get(self, user_id: int):

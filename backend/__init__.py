@@ -1,16 +1,19 @@
 from flask import Flask
 from flask_smorest import Api
+from flask_cors import CORS
 from sqlalchemy.exc import SQLAlchemyError
 
 from .methods import exceptions
+from .methods.auth import jwt
 from .models import db, migrate
 from .schema import ma
 from .schema.auth import UserSchema, OrganisationSchema
 from .routes import api, errors
-from .routes.auth import users, organisations
+from .routes.auth import users, organisations, api as auth_api
 
 
 def register_blueprints(api: Api):
+    api.register_blueprint(auth_api, url_prefix="/auth")
     api.register_blueprint(users.api, url_prefix="/auth/users")
     api.register_blueprint(organisations.api, url_prefix="/auth/organisations")
 
@@ -37,4 +40,6 @@ def create_app(Config) -> Flask:
     db.init_app(app)
     ma.init_app(app)
     migrate.init_app(app, db)
+    jwt.init_app(app)
+    CORS(app)
     return app
