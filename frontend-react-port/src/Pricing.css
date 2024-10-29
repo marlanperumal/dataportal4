@@ -1,0 +1,435 @@
+.packageList_databaseItem,
+.slide .data-sets td,
+.slide select,
+.slide .btn.btn-primary,
+.package-options h3,
+.arrow_box,
+.feature-border-box > p {
+  font-family: "Source Sans Pro", sans-serif;
+}
+
+div#Pricing,
+.packageItem_container {
+  min-height: 100%;
+  position: relative;
+}
+
+.packageItem_wrapper a {
+  color: #e95d58;
+  text-decoration: none;
+}
+
+.packageItem_wrapper a:hover {
+  color: #34567d;
+  text-decoration: none;
+}
+
+.packageItem_wrapper ul {
+  padding-left: 0px;
+  margin-left: 0px;
+}
+
+.packageItem_icon {
+  color: #e95d58;
+  padding: 10px;
+}
+
+.packageItem_name {
+  font-size: 21px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.packageItem_databaseItem {
+  font-size: 11px;
+  list-style-type: none;
+}
+
+.packageList_container {
+  background-color: #f3f2f2;
+  padding-bottom: 110px;
+  padding-top: 30px;
+}
+
+.packageList {
+  display: table;
+  padding-bottom: 10px;
+  font-size: 12px;
+}
+
+.packageList_title {
+  color: #506a85;
+  padding-bottom: 5px;
+}
+
+.subheading {
+  font-size: 18px;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+}
+
+.packageList_name {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.packageList_databaseItem {
+  list-style-type: none;
+  padding-right: 10px;
+  border-right: 1px solid #ccc;
+  margin-right: 10px;
+  float: left;
+  font-size: 13px;
+}
+
+.col-md-4.col-sm-4:first-child {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.col-md-4.col-sm-4:last-child {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.slider4 {
+  width: 1300px;
+  overflow: hidden;
+  position: relative;
+  margin-left: -70px;
+  padding-left: 70px;
+}
+
+.swiper-wrapper {
+  overflow: hidden;
+  width: 1550px;
+}
+
+.swiper-container {
+  width: 1550px;
+  height: auto;
+  overflow: hidden;
+  margin-left: 16px;
+  width: 1144px;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  position: absolute;
+  background: url(assets/images/Home/controls.png) no-repeat;
+  width: 60px !important;
+  height: 88px;
+  top: 294px;
+  z-index: 999;
+}
+
+.swiper-button-prev {
+  background-position: 5px 4px;
+}
+
+.swiper-button-next {
+  background-position: -70px 2px;
+}
+
+.slide {
+  position: relative;
+  width: 354.8px !important;
+  height: 698px;
+  text-align: center;
+  background: #fff;
+  border: 2px solid #ccc;
+  margin-bottom: 30px;
+  float: left;
+  display: inline-block;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.swiper-slide.slide.swiper-slide-prev {
+  margin-right: 39.5px !important;
+}
+
+.slide:last-child {
+  margin-right: 0 !important;
+}
+
+.swiper-button-disabled {
+  display: none;
+}
+
+.slide .selected-pricing {
+  margin-top: 10px;
+}
+
+.slide .selected-pricing h2,
+#SelectedDataPackage .modal-body h2 {
+  font-size: 22px;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  margin-top: 28px;
+  color: #506a85;
+}
+
+.slide .selected-pricing h3,
+#SelectedDataPackage .modal-body h3 {
+  font-size: 36px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.slide .selected-pricing .price,
+#SelectedDataPackage .modal-body .price {
+  color: #e65e5c;
+  font-family: "Source Sans Pro", sans-serif;
+  font-weight: normal;
+}
+
+.selected-pricing .pmonth,
+#SelectedDataPackage .modal-body .pmonth,
+.slide .selected-pricing p {
+  font-size: 14px;
+  color: #506a85;
+  font-weight: normal;
+  font-family: "Source Sans Pro", sans-serif;
+}
+
+.free-trial-small {
+  float: right;
+  margin-right: -17px;
+  margin-top: -133px;
+  cursor: pointer;
+}
+
+.bx-wrapper img {
+  max-width: 100%;
+  display: block;
+}
+
+p.annual,
+span.annual {
+  color: #777 !important;
+}
+
+span.annual {
+  display: block;
+}
+
+.slide .data-sets {
+  text-align: left;
+  margin-top: 30px;
+}
+
+.slide .table-striped > tbody > tr:nth-of-type(odd) {
+  background-color: #fff;
+}
+
+.slide .data-sets td {
+  border: none;
+  padding: 4px 0;
+}
+
+.slide .data-sets h4 {
+  margin-top: 0;
+  margin-bottom: 0px;
+  border-bottom: 1px dashed #ccc;
+  padding-bottom: 10px;
+  color: #506a85;
+  font-weight: normal;
+}
+
+.data-sets .table i.fa.fa-info {
+  color: #999;
+  margin-left: 5px;
+  font-size: 13px;
+  padding: 1px 5px;
+  border: 1px solid #999;
+  border-radius: 100px;
+  width: 16px;
+  height: 16px;
+}
+
+.black {
+  color: #000;
+}
+
+.slide select {
+  padding: 10px 8px;
+  margin: 20px 0;
+  width: 100%;
+  color: #777;
+  border: 2px solid #409bf8;
+  background-color: #fff;
+}
+
+.slide .btn.btn-primary {
+  width: 100%;
+  padding: 10px 11px;
+  font-size: 18px;
+  color: #fff;
+  background-color: #409bf8;
+  border-color: #409bf8;
+}
+
+.package-options h3 {
+  font-size: 13px;
+  color: #555;
+  font-weight: normal;
+}
+
+.arrow_box {
+  font-size: 32px;
+  margin-top: 0;
+  padding: 16px 50px !important;
+  background-color: #409bf8;
+  border-color: #409bf8;
+  width: 100%;
+  cursor: initial;
+  color: #fff;
+  text-align: center;
+}
+
+.arrow_box:after,
+.arrow_box:before {
+  bottom: 100%;
+  left: 5%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  top: -40px;
+}
+
+.arrow_box:before {
+  border-color: rgba(194, 225, 245, 0);
+  border-bottom-color: #409bf8;
+  border-width: 22px;
+}
+
+.arrow_box:after {
+  border-color: rgba(136, 183, 213, 0);
+  border-bottom-color: #409bf8;
+  border-width: 22px;
+}
+
+.feature-border-box {
+  padding: 25px 20px 20px;
+  background: #fff;
+  text-align: center;
+  margin-bottom: 20px;
+  border: 2px solid #ccc;
+}
+
+.feature-border-box h3 {
+  color: #506a85;
+  margin-top: 10px;
+}
+
+.feature-border-box .btn-default,
+.feature-border-box .btn-default:hover {
+  color: #3f9bf8;
+  font-size: 14px;
+  padding: 8px 11px;
+  background-color: #fff;
+  border-color: #3f9bf8;
+}
+
+.modal-dialog {
+  z-index: 9999;
+}
+
+.modal-dialog.PricingModalClass .modal-header {
+  background: #fff;
+}
+
+.modal-dialog.PricingModalClass .modal-header .fa-times-circle.close-window {
+  float: right;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  filter: alpha(opacity=20);
+  opacity: 0.2;
+}
+
+.modal-dialog .package-info {
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.modal-dialog .package-info .modal-title {
+  color: #506a85;
+  font-weight: normal;
+  font-size: 22px;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  margin-top: -16px;
+}
+
+.modal-dialog .enquire label {
+  color: #777;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+.modal-dialog .enquire .btn-primary,
+.modal-dialog .enquire .btn-primary:focus,
+.modal-dialog .enquire .btn-primary:active {
+  color: #fff;
+  font-size: 14px;
+  padding: 8px 11px;
+  background-color: #409bf8;
+  border-color: #409bf8;
+  border-radius: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+}
+
+.modal-dialog .enquire > h2 {
+  font-size: 22px;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  color: #506a85;
+}
+
+.modal-dialog .enquire > h3 {
+  font-size: 36px;
+  font-weight: normal;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.modal-dialog .enquire .price {
+  color: #e65e5c;
+}
+
+.modal-dialog .enquire .pmonth {
+  font-size: 14px;
+  color: #506a85;
+}
+
+.modal-dialog .enquire ul {
+  padding-left: 30px;
+  list-style-type: square;
+}
+
+.modal-dialog .modal-body p,
+.modal-dialog .modal-body form {
+  padding: 5px 0 0;
+}
+
+.modal-dialog .enquire form .form-control {
+  height: 34px;
+}
+
+.modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.swiper-button-prev {
+  left: 20px;
+}
+
+.swiper-button-next {
+  left: 1234px;
+}

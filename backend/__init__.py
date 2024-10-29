@@ -8,7 +8,7 @@ from .methods.auth import jwt
 from .models import db, migrate
 from .schema import ma
 from .schema.auth import UserSchema, OrganisationSchema
-from .routes import api, errors
+from .routes import api, errors, cli
 from .routes.auth import users, organisations, api as auth_api
 
 
@@ -30,6 +30,10 @@ def register_apispec_components(api: Api):
     )
 
 
+def register_cli_commands(app: Flask):
+    app.register_blueprint(cli.api, cli_group=None)
+
+
 def create_app(Config) -> Flask:
     app = Flask(__name__)
     app.config.from_object(Config)
@@ -37,6 +41,7 @@ def create_app(Config) -> Flask:
     register_apispec_components(api)
     register_blueprints(api)
     register_error_handlers(app)
+    register_cli_commands(app)
     db.init_app(app)
     ma.init_app(app)
     migrate.init_app(app, db)

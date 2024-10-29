@@ -6,7 +6,6 @@ from sqlalchemy import (
     Boolean,
     Date,
     UniqueConstraint,
-    ForeignKeyConstraint,
 )
 from sqlalchemy.orm import relationship, backref
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -159,9 +158,6 @@ class SubscriptionGroup(db.Model):
 class PackageContent(db.Model):
     __tablename__ = "package_content"
     __table_args__ = (
-        ForeignKeyConstraint(
-            ["table_id", "field_id"], ["meta.field.table_id", "meta.field.field_id"]
-        ),
         UniqueConstraint("package_id", "dataset_id", "table_id", "field_id"),
         {"schema": "auth"},
     )
@@ -170,4 +166,4 @@ class PackageContent(db.Model):
     package_id = Column(Integer, ForeignKey("auth.package.id"), index=True)
     dataset_id = Column(Integer, ForeignKey("meta.dataset.id"), index=True)
     table_id = Column(Integer, ForeignKey("meta.table.id"), index=True)
-    field_id = Column(Integer, index=True)
+    field_id = Column(Integer, ForeignKey("meta.field.id"), index=True)

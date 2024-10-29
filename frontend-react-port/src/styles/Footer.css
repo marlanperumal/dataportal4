@@ -1,0 +1,57 @@
+/* //-----------------------------------------------
+//FOOTER STYLING
+//There are two parts to the footer:
+//1. App Footer only contains the copyright
+//2. Eighty20 Footer includes links to the Eighty20 website
+//----------------------------------------------- */
+
+.footer {
+  background-color: #34567d;
+  font-size: 12px;
+  width: 100%;
+  bottom: 0;
+  right: 0;
+  z-index: 2000;
+  position: absolute;
+}
+
+.panel-footer-buttons {
+  padding-top: 6px;
+}
+
+.footerApp {
+  background-color: #34567d;
+  font-size: 12px;
+  width: 100%;
+  bottom: 0;
+  right: 0;
+  position: fixed;
+}
+
+.footer_Eighty20 {
+  background-color: #2f4052;
+  padding: 20px;
+}
+.footer_links {
+  font-size: 12px;
+  text-align: center;
+  color: #a3b1bf;
+}
+.footer_link_item {
+  padding: 10px;
+}
+.footer_links a {
+  color: #a3b1bf;
+  text-decoration: none;
+}
+.footer_links a:hover {
+  color: #fff;
+  text-decoration: none;
+}
+.footer_copyright {
+  background-color: #283645;
+  font-size: 11px;
+  color: #707e8c;
+  text-align: center;
+  padding: 15px 5px 15px 5px;
+}

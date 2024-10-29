@@ -1,0 +1,51 @@
+<div class="container">
+  <div row>
+    <mat-card class="login-card">
+      <mat-card-content>
+        <img src="assets/img/Eighty20 Logo.svg" class="full-width">
+        <form [formGroup]="loginForm" (submit)="onSubmit()">
+          <div>
+            <mat-form-field class="full-width" appearance="outline">
+              <mat-icon matPrefix>person</mat-icon>
+              <mat-label>Email</mat-label>
+              <input matInput placeholder="user@example.com">
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field class="full-width" appearance="outline">
+              <mat-icon matPrefix>lock</mat-icon>
+              <mat-label>Password</mat-label>
+              <input matInput type="password" placeholder="supersecretpassword">
+            </mat-form-field>
+          </div>
+          <div class="button-row">
+            <button type="submit" mat-raised-button color="primary">Login</button>
+            <span class="spacer"></span>
+            <a mat-button disabled>Forgot Password</a>
+            <a mat-button disabled>Sign Up</a>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+    <div class="divider-box">
+      <div class="divider"><mat-divider></mat-divider></div>
+      <div class="divider-text">OR</div>
+      <div class="divider"><mat-divider></mat-divider></div>
+    </div>
+    <mat-card>
+      <mat-card-content>
+        Login with Google
+      </mat-card-content>
+    </mat-card>
+    <mat-card>
+      <mat-card-content>
+        Login with Microsoft
+      </mat-card-content>
+    </mat-card>
+    <mat-card>
+      <mat-card-content>
+        Login with LinkedIn
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

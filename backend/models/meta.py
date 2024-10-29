@@ -102,7 +102,7 @@ class Field(db.Model):
     __table_args__ = {"schema": "meta"}
 
     id: int = Column(Integer, primary_key=True)
-    table_id: str = Column(String, ForeignKey("meta.table.id"), index=True)
+    table_id: str = Column(Integer, ForeignKey("meta.table.id"), index=True)
     name: str = Column(String)
     type: str = Column(String)
     handle: str = Column(String)

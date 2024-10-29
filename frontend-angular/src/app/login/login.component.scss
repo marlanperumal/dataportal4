@@ -1,0 +1,41 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background-color: #E8EAF6;
+}
+
+.login-card {
+  min-width: 320px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.button-row {
+  display: flex;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.divider-box {
+  display: flex;
+  align-items: center;
+}
+
+.divider {
+  flex: 1 1 auto;
+}
+
+.divider-text {
+  margin-left: 4px;
+  margin-right: 4px;
+}
+
+.mat-card {
+  margin-bottom: 8px;
+}

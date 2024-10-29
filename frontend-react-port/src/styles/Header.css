@@ -1,0 +1,320 @@
+/* //-----------------------------------------------
+//Styles for the Header and menu items
+//------------------------------------------------------- */
+
+.navbar {
+  background-color: #283645;
+  padding: 0;
+  border-radius: 0;
+  border: none;
+  margin: 0;
+  z-index: 99;
+}
+
+.navbar.sticky-top.navbar-light.bg-faded.active-navbar {
+  position: fixed;
+  width: 100%;
+  top: 20px;
+  left: 0;
+  right: 0;
+  height: 47px;
+  min-height: 47px;
+  background-color: #34567d !important;
+  border-bottom: 1px solid #111;
+}
+
+.navbar.sticky-top.navbar-light.bg-faded.active-navbar .last-saved {
+  margin-top: 4px;
+  color: #fff !important;
+}
+
+.navbar.sticky-top.navbar-light.bg-faded .AutoSaving {
+  position: absolute;
+  top: -1px;
+  fill: #999;
+  color: #999;
+  right: 23px;
+  font-size: 12px;
+  width: 360px;
+}
+
+.navbar.sticky-top.navbar-light.bg-faded .AutoSaving svg {
+  position: relative;
+  top: -1px;
+  margin-left: 8px;
+}
+
+.navbar.sticky-top.navbar-light.bg-faded.active-navbar .AutoSaving {
+  right: 33px;
+}
+
+.navbar.sticky-top.navbar-light.bg-faded.active-navbar .AutoSaving svg {
+  top: 6px;
+}
+
+.navbar.sticky-top.navbar-light.bg-faded.active-navbar .btn.active,
+.navbar.sticky-top.navbar-light.bg-faded.active-navbar .btn:active {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.navbar.sticky-top.navbar-light.bg-faded.active-navbar .tools .dropdown-menu {
+  margin-top: -5px;
+  margin-right: 6px;
+}
+
+.navbar.active-navbar .btn-group {
+  margin-top: 13px;
+  margin-right: 3px;
+}
+
+.navbar.active-navbar .btn-group > li {
+  top: 0px;
+  position: relative;
+  padding: 0 6px;
+  color: #999;
+  font-size: 14px;
+  float: left;
+  display: inline-block;
+}
+
+.navbar.active-navbar span.glyphicon-arrow-up {
+  margin-top: 8px;
+  margin-left: -30px;
+  color: #999;
+}
+
+.navbar.active-navbar .btn-group > li.glyphicon-cog {
+  margin-top: -3px;
+}
+
+.navbar-brand {
+  background: transparent url("../assets/images/logo.png") no-repeat scroll left
+    3px;
+  width: 295px;
+  margin-top: 10px !important;
+  margin-left: 5px !important;
+  height: 61px;
+}
+
+.navbar-fixed-top {
+  border: 0;
+  width: 100%;
+  position: absolute;
+  padding-top: 0px;
+  transition: all 0.3s ease 0s;
+  background-color: #283645;
+}
+
+.navbar-nav > li {
+  margin: 9px 0px 4px;
+}
+
+.navbar-collapse > ul .navbar-nav {
+  padding-top: 20px;
+}
+
+.navbar-nav > li > a {
+  border: 1px solid transparent;
+  background-color: #283645 !important;
+  border-radius: 0;
+}
+
+.navbar-nav > li > a:hover,
+.navbar-nav > li > a:focus {
+  border: 1px solid transparent;
+  background-color: #31455b !important;
+}
+
+.navbar-nav > li > a > span {
+  color: #eee;
+  font-weight: normal;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.navbar-nav > li > a:hover > span {
+  color: #fff;
+  font-weight: normal;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.navbar-nav > li > a > i {
+  color: #c7d1d8;
+  display: block;
+  font-size: 15px;
+}
+
+.navbar-nav > li > a:hover > i {
+  color: #fff;
+}
+
+.nav .open > a > i {
+  color: #fff;
+}
+
+.navbar-default .navbar-nav > li > a {
+  color: #c7d1d8;
+  font-size: 14px;
+  font-family: Source Sans Pro, Helvetica, Arial, sans-serif;
+}
+
+.navbar-default .navbar-nav > li > a:focus,
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > .open > a {
+  color: #fff !important;
+}
+
+.navbar-nav > li > a:hover > i {
+  color: #fff;
+}
+
+.btn-group .button-top-nav {
+  box-shadow: 0px 10px 20px rgb(204, 204, 204) inset;
+  background-color: #eee;
+  border: 1px solid #2f4052;
+  border-radius: 8px 8px 0 0;
+  padding: 10px 20px;
+}
+
+.nav .open > a,
+.nav .open > a:focus,
+.nav .open > a:hover {
+  border-top: 1px solid #283645;
+  background-color: #283645 !important;
+  border-bottom: none;
+  border-left: 1px solid #283645;
+  border-right: 1px solid #283645;
+  border-top: 1px solid #283645;
+  /* font-weight: bold; */
+  border-radius: 1px;
+  white-space: normal;
+}
+
+.navbar-nav > li > .dropdown-menu {
+  background-color: #fff !important;
+  padding-bottom: 5px;
+  border: 1px solid #888;
+  margin-top: 4px;
+}
+
+.navbar-nav > li > .dropdown-menu:after,
+.navbar-nav > li > .dropdown-menu:before {
+  bottom: 100%;
+  left: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.navbar-nav > li > .dropdown-menu:after {
+  border-color: rgba(136, 183, 213, 0);
+  border-bottom-color: #fff;
+  border-width: 8px;
+  margin-left: 54px;
+}
+
+.navbar-nav > li > .dropdown-menu:before {
+  border-color: rgba(194, 225, 245, 0);
+  border-bottom-color: #444;
+  border-width: 10px;
+  margin-left: 52px;
+}
+
+.navbar-nav .dropdown-menu li {
+  border-bottom-color: #888;
+  padding: 2px 0 3px;
+}
+
+.navbar-nav > li > .dropdown-menu li i.fa {
+  float: left;
+  /* display: inline-block; */
+  margin-top: 4px;
+  margin-left: 7px;
+  color: #999;
+}
+
+.navbar-nav .dropdown-menu li:last-child {
+  border-bottom: none;
+  padding-bottom: 1px;
+}
+
+.navbar-nav .dropdown-menu li:last-child > a {
+  padding-bottom: 0;
+}
+
+.navbar-nav .dropdown-menu > li > a {
+  color: #333 !important;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  display: inline;
+  font-family: Source Sans Pro, Helvetica, Arial, sans-serif;
+}
+
+.navbar-nav .dropdown-menu > li > a:hover {
+  color: #e95d58 !important;
+  background-color: inherit;
+}
+
+.header-navigation-options {
+  padding-top: 5px;
+}
+
+.header-navigation-options i {
+  margin-right: 10px;
+}
+
+.nav-tabs .btn:active {
+  box-shadow: none;
+}
+
+.nav-tabs .btn:active:focus,
+.btn:focus {
+  outline: 0;
+}
+
+/* // -------------------------------------
+// TOGGLE FOR NAVBAR ON SMALLER DEVICES
+// ------------------------------------- */
+
+.navbar-toggle {
+  background-color: #2f4052;
+}
+
+.navbar-default .navbar-toggle {
+  border-color: #2f4052;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #fff;
+}
+
+.navbar-default .navbar-toggle:hover {
+  border-color: #e95d58;
+}
+
+.navbar-default .navbar-toggle:focus,
+.navbar-default .navbar-toggle:hover {
+  background-color: #e95d58;
+}
+
+/* // -------------------------------------
+// STYLES FOR HELP MODAL BANNER
+// ------------------------------------- */
+
+.jumbotron {
+  padding-top: 0.5px;
+  padding-bottom: 0.5px;
+  margin-bottom: 5px;
+  background-color: rgb(198, 228, 243);
+}
+
+.help-message-style {
+  margin: 0px;
+  height: 105px;
+  width: 262px;
+}
